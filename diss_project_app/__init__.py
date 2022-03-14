@@ -82,4 +82,4 @@ class SlotsPage(Page):
         player.slot_shown = slot
 
 
-page_sequence = [SlotsPage]
+page_sequence = [WelcomePage, DemographicsPage, InstructionsPage, SlotsPage]
