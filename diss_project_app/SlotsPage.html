@@ -1,0 +1,45 @@
+{{ block title }}
+    Page title
+{{ endblock }}
+
+{{ block content }}
+
+ <img src="{% player.slot_shown %}" alt="slot output">
+
+    {{ next_button }}
+
+<style>
+
+    body {
+  background-color: white;
+}
+
+title {
+  color: white;
+  text-align: center;
+}
+
+p {
+  font-family: Verdana, serif;
+  font-size: medium;
+}
+
+img {
+  width: 400px;
+  height: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+ul {
+    font-family: Verdana, serif;
+  font-size: medium;
+}
+
+</style>
+
+{{ endblock }}
+
+
