@@ -31,6 +31,7 @@ class C(BaseConstants):
         "https://i.imgur.com/WRc7KkB.png", "https://i.imgur.com/WRc7KkB.png", "https://i.imgur.com/WRc7KkB.png",
         "https://i.imgur.com/WRc7KkB.png", "https://i.imgur.com/WRc7KkB.png", "https://i.imgur.com/WRc7KkB.png",)
 
+
 class Subsession(BaseSubsession):
     pass
 
@@ -45,6 +46,12 @@ class Player(BasePlayer):
         [True, 'Yes, I consent to this experiment'],
         [False, 'No, I do not consent to this experiment'],
     ])
+
+    def consent_error_message(player, value):
+        print('value is', value)
+        if not player.consent:
+            return 'You cannot reach the next page before consenting to this experiment'
+
     understood_instructions = models.BooleanField(label="Have you read and understood the above instructions?", choices=[
         [True, 'Yes, I have read and understood the above instructions'],
         [False, 'No, I have not read and understood the above instructions'],
@@ -58,6 +65,7 @@ class Player(BasePlayer):
         ["prefer_not_to_say", "Prefer not to say"]
     ])
     slot_shown = models.StringField()
+
 
 # PAGES
 class WelcomePage(Page):
@@ -82,4 +90,4 @@ class SlotsPage(Page):
         player.slot_shown = slot
 
 
-page_sequence = [WelcomePage, InstructionsPage, SlotsPage]
+page_sequence = [WelcomePage, DemographicsPage, InstructionsPage, SlotsPage]
