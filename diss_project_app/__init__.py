@@ -11,24 +11,24 @@ class C(BaseConstants):
     PLAYERS_PER_GROUP = None
     NUM_ROUNDS = 500
     tuple_control_treatment1 = (
-        "777.png", "777.png", "WWW.png", "WWW.png", "WWW.png",
-        "WWW.png", "PPP.png", "PPP.png", "PPP.png", "PPP.png",
-        "PPP.png", "PPP.png", "7P7.png", "PWP.png", "WWP.png",
-        "PW7.png", "P7W.png", "WP7.png", "W7P.png", "7PW.png",
-        "7WP.png", "PW7.png", "WP7.png", "7PW.png", "W7P.png"
+        "777", "777", "WWW", "WWW", "WWW",
+        "WWW", "PPP", "PPP", "PPP", "PPP",
+        "PPP", "PPP", "7P7", "PWP", "WWP",
+        "PW7", "P7W", "WP7", "W7P", "7PW",
+        "7WP", "PW7", "WP7", "7PW", "W7P"
     )
     tuple_NSNM_treatment2 = (
-        "777.png", "777.png", "WWW.png", "WWW.png", "WWW.png",
-        "WWW.png", "PPP.png", "PPP.png", "PPP.png", "PPP.png",
-        "PPP.png", "PPP.png", "7P7.png", "W77.png", "W7W.png",
-        "PWW.png", "PWP.png", "7PP.png", "7P7.png", "W77.png",
-        "W7W.png", "PWW.png", "7PP.png", "PW7.png", "7PW.png"
+        "777", "777", "WWW", "WWW", "WWW",
+        "WWW", "PPP", "PPP", "PPP", "PPP",
+        "PPP", "PPP", "7P7", "W77", "W7W",
+        "PWW", "PWP", "7PP", "7P7", "W77",
+        "W7W", "PWW", "7PP", "PW7", "7PW"
     )
     tuple_SNM_treatment3 = (
-        "777.png", "777.png", "WWW.png", "WWW.png", "WWW.png",
-        "WWW.png", "PPP.png", "PPP.png", "PPP.png", "PPP.png",
-        "PPP.png", "PPP.png", "77P.png", "77W.png", "WWP.png",
-        "WW7.png", "PPW.png", "PP7.png", "77P.png", "77W.png",
+        "777", "777", "WWW", "WWW", "WWW",
+        "WWW", "PPP", "PPP", "PPP", "PPP",
+        "PPP", "PPP", "77P", "77W", "WWP",
+        "WW7", "PPW", "PP7", "77P", "77W",
         "WWP", "WW7", "PP7", "PW7", "WP7"
     )
 
@@ -83,12 +83,13 @@ class InstructionsPage(Page):
         return player.round_number == 1
 
 class SlotsPage(Page):
+    endowment = 100
     @staticmethod
     def vars_for_template(player):
-        slot = random.choice(C.tuple_control_treatment1)
+        slot = random.choice(C.tuple_SNM_treatment3)
         player.slot_shown = slot
         return dict(
-            image_path="{}".format(slot)
+            image_path="{}.png".format(slot)
         )
 
 

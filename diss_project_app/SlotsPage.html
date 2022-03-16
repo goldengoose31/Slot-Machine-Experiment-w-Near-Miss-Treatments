@@ -1,20 +1,21 @@
 {{ block title }}
-    SLOTS
+<h1>SLOT MACHINE</h1>
 {{ endblock }}
 
 {{ block content }}
 
  <img src="{% static image_path %}" alt="slot output">
-    {{ next_button }}
+
+<p>You have !100! tokens</p>
 
 <style>
 
     body {
-  background-color: white;
+  background-color: darkred;
 }
 
-title {
-  color: white;
+h1 {
+  color: black;
   text-align: center;
 }
 
@@ -29,15 +30,24 @@ img {
   display: block;
   margin-left: auto;
   margin-right: auto;
+  border: 10px solid black;
 }
 
-
 ul {
-    font-family: Verdana, serif;
+  font-family: Verdana, serif;
   font-size: medium;
 }
 
+.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
 </style>
+
+<div class="center">
+    {{ next_button }}
+</div>
 
 {{ endblock }}
 
