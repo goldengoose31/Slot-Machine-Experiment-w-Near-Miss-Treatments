@@ -1,11 +1,10 @@
 {{ block title }}
-    Page title
+    SLOTS
 {{ endblock }}
 
 {{ block content }}
 
- <img src="{% player.slot_shown %}" alt="slot output">
-
+ <img src="{% static image_path %}" alt="slot output">
     {{ next_button }}
 
 <style>
