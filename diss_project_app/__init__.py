@@ -3,7 +3,7 @@ import random
 
 
 doc = """
-A slot machine experiment testing the saliency of near-miss events and how they affect subjects' behaviour
+A slot machine experiment to test the saliency of near-miss events
 """
 
 
@@ -44,11 +44,12 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
+    # FORM FIELDS
     email_address = models.StringField(label="Please input your email address:")
-    consent = models.BooleanField(label="Do you consent?", choices=[
+    consent = models.BooleanField(label="Do you consent to your data being used for this experiment?", choices=[
         [True, 'Yes'],
     ])
-    understood_instructions = models.BooleanField(label="Have you read and understood the above instructions?", choices=[
+    understood_instructions = models.BooleanField(label="Please confirm you have read and understood the above instructions", choices=[
         [True, 'Yes, I have read and understood'],
     ])
     age = models.IntegerField(label="How old are you?", blank=True)
@@ -59,11 +60,12 @@ class Player(BasePlayer):
         ["other", "Other"],
         ["prefer_not_to_say", "Prefer not to say"]
     ])
+    # EXPERIMENT VARIABLES
     slot_shown = models.StringField()
     treatment = models.IntegerField()
 
 
-#FUNCTIONS
+# FUNCTIONS
 def creating_session(subsession):
     if subsession.round_number == 1:
         Player.treatment = Player.id_in_group % 3
@@ -73,6 +75,7 @@ def creating_session(subsession):
 class WelcomePage(Page):
     form_model = 'player'
     form_fields = ['consent', 'email_address']
+    # VISIBLE WHEN
     @staticmethod
     def is_displayed(player):
         return player.round_number == 1
@@ -81,6 +84,7 @@ class WelcomePage(Page):
 class DemographicsPage(Page):
     form_model = 'player'
     form_fields = ['age', 'gender']
+    # VISIBLE WHEN
     @staticmethod
     def is_displayed(player):
         return player.round_number == 1
@@ -89,6 +93,7 @@ class DemographicsPage(Page):
 class InstructionsPage(Page):
     form_model = 'player'
     form_fields = ['understood_instructions']
+    # VISIBLE WHEN
     @staticmethod
     def is_displayed(player):
         return player.round_number == 1
@@ -99,12 +104,6 @@ class FirstSlotsPage(Page):
         return player.round_number == 1
 
 
-   # @staticmethod
-    #def before_next_page(player, timeout_happened):
-        #slot = random.choice(C.tuple_SNM_treatment2)
-        #player.slot_shown = slot + ".png"
-
-
 class SlotsPage(Page):
     @staticmethod
     def vars_for_template(player: Player):
@@ -113,3 +112,9 @@ class SlotsPage(Page):
 
 
 page_sequence = [WelcomePage, DemographicsPage, InstructionsPage, FirstSlotsPage, SlotsPage]
+
+
+# @staticmethod
+# def before_next_page(player, timeout_happened):
+# slot = random.choice(C.tuple_SNM_treatment2)
+# player.slot_shown = slot + ".png"

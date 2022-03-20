@@ -1,16 +1,17 @@
 {{ block title }}
-<h1>SLOT MACHINE</h1>
+<h1><b>SLOTS</b></h1>
 {{ endblock }}
 
 {{ block content }}
 
  <img src="{% static player.slot_shown %}" alt="slot output">
 
-<p>You have {{C.endowment}} tokens</p>
-<br>
-<br>
+<p>You have {{C.endowment}} Tokens
+    <br>
+    <br>
+</p>
 
-<p>3 Plums = 10 tokens<br>3 Watermelons = 20 tokens<br>3 Lucky 7s = 50 tokens</p>
+<p>3 Plums = 10 Tokens<br>3 Watermelons = 20 Tokens<br>3 Lucky 7s = 50 Tokens</p>
 
 <style>
 
@@ -21,6 +22,7 @@
 h1 {
   color: antiquewhite;
   text-align: center;
+    font-size: xxx-large;
 }
 
 p {

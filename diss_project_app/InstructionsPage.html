@@ -1,15 +1,16 @@
 {{ block title }}
-    Instructions
+<h1><b>Instructions</b></h1>
 {{ endblock }}
 
 {{ block content }}
+<br>
  <ul>
-  <li>You will be playing a simple game that is comparable to a real life slot machine, with fixed bets and the potential for payoffs</li>
-  <li>There are 3 different images that can show up. A plum, a watermelon, and a lucky 7:</li>
+  <li>You will be playing a simple game that is comparable to a real life slot machine, with bets and the potential for payoffs</li>
+     <li>There are 3 different images that can show up. <b>A plum, a watermelon, and a lucky 7:</b></li>
 </ul>
 
 <br>
-<img src="https://i.imgur.com/KDxzOKe.png" alt="Examples of reels" >
+<img src="https://i.imgur.com/KDxzOKe.png" class="slots" alt="Examples of reels" >
 <br>
 
 <ul>
@@ -18,19 +19,26 @@
 </ul>
 
 <br>
-<img src="https://i.imgur.com/OGj6KIl.png" alt="Payoffs">
+<img src="https://i.imgur.com/OGj6KIl.png" class="payoffs" alt="Payoffs">
 <br>
 
 <ul>
     <li>These payoffs will be displayed on the next page as well for convenience</li>
-    <li>You will be endowed with a starting amount of 100 tokens, and each bet on the slot machine costs you 10 tokens</li>
-    <li>Each token is equivalent to one ticket in the prize draw. You can win tokens to get a higher amount of tickets in the prize draw</li>
-    <li>Please confirm you have read and understood the instructions</li>
+    <li>You will be endowed with a starting amount of <b>100</b> tokens, and each bet on the slot machine costs you <b>10</b> tokens</li>
+    <li>Each token is equivalent to one ticket in the prize draw <b>(3 x £20 Amazon vouchers)</b>. You can win tokens to get a higher amount of tickets in the prize draw</li>
+    <br>
+    <li>Whenever you are out of tokens, or you wish to stop playing, you can simply exit the tab and your results will be automatically recorded</li>
 </ul>
 
     {{ formfields }}
 
+<p><b>GOOD LUCK!</b></p>
+
 <style>
+
+    h1 {
+  text-align: center;
+}
 
     body {
   background-color: lightblue;
@@ -46,13 +54,21 @@ p {
   font-size: medium;
 }
 
-img {
+.slots {
   width: 350px;
   height: auto;
   display: block;
   margin-left: auto;
   margin-right: auto;
   border: 8px solid black;
+}
+
+.payoffs {
+      width: 350px;
+  height: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 ul {
