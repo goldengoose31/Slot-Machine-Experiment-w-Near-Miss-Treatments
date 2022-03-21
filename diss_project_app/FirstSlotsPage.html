@@ -6,11 +6,16 @@
 
  <img src="https://i.imgur.com/Iapt8Tx.png" alt=" blank slot output">
 
-<p>You have {{C.endowment}} tokens</p>
-<br>
-<br>
+<p>You have {{C.endowment}} tokens
+    <br>
+</p>
 
-<p>3 Plums = 10 tokens<br>3 Watermelons = 20 tokens<br>3 Lucky 7s = 50 tokens<br><br>Good luck!</p>
+<p>Plums = 10 tokens<br>
+    Watermelons = 20 tokens<br>
+    Lucky 7s = 50 tokens<br>
+    <br>
+    <b>Good luck!</b>
+</p>
 
 <style>
 
@@ -44,15 +49,14 @@ ul {
   font-size: medium;
 }
 
-.center {
-  margin-left: auto;
-  margin-right: auto;
-}
+
 
 </style>
 
-<div class="center">
-    {{ next_button }}
+
+
+<div style="text-align:center" >
+<button name="slot_spun" value="True">SPIN</button>
 </div>
 
 {{ endblock }}

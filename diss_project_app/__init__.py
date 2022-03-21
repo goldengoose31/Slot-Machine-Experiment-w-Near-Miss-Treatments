@@ -1,7 +1,6 @@
 from otree.api import *
 import random
 
-
 doc = """
 A slot machine experiment to test the saliency of near-miss events
 """
@@ -10,7 +9,7 @@ A slot machine experiment to test the saliency of near-miss events
 class C(BaseConstants):
     NAME_IN_URL = 'diss_project_app'
     PLAYERS_PER_GROUP = None
-    NUM_ROUNDS = 500
+    NUM_ROUNDS = 30
     endowment = 100
     tuple_control_treatment0 = (
         "777", "777", "WWW", "WWW", "WWW",
@@ -46,35 +45,42 @@ class Group(BaseGroup):
 class Player(BasePlayer):
     # FORM FIELDS
     email_address = models.StringField(label="Please input your email address:")
-    consent = models.BooleanField(label="Do you consent to your data being used for this experiment?", choices=[
-        [True, 'Yes'],
-    ])
-    understood_instructions = models.BooleanField(label="Please confirm you have read and understood the above instructions", choices=[
-        [True, 'Yes, I have read and understood'],
-    ])
+    consent = models.BooleanField(
+        label="Do you consent to your data being used for this experiment?", choices=[
+            [True, 'Yes'],
+        ])
+    understood_instructions = models.BooleanField(
+        label="Please confirm you have read and understood the above instructions", choices=[
+            [True, 'Yes, I have read and understood'],
+        ])
     age = models.IntegerField(label="How old are you?", blank=True)
-    gender = models.StringField(label="Gender:", blank=True,
-    choices=[
-        ["male", "Male"],
-        ["female", "Female"],
-        ["other", "Other"],
-        ["prefer_not_to_say", "Prefer not to say"]
-    ])
+    gender = models.StringField(
+        label="Gender:", blank=True,
+        choices=[
+            ["male", "Male"],
+            ["female", "Female"],
+            ["other", "Other"],
+            ["prefer_not_to_say", "Prefer not to say"]
+        ])
     # EXPERIMENT VARIABLES
     slot_shown = models.StringField()
     treatment = models.IntegerField()
+    slot_spun = models.BooleanField()
+    tokens = models.IntegerField()
+    message = models.StringField()
 
 
 # FUNCTIONS
 def creating_session(subsession):
-    if subsession.round_number == 1:
-        Player.treatment = Player.id_in_group % 3
+    for player in subsession.get_players():
+        player.treatment = player.id_in_group % 3
 
 
 # PAGES
 class WelcomePage(Page):
     form_model = 'player'
     form_fields = ['consent', 'email_address']
+
     # VISIBLE WHEN
     @staticmethod
     def is_displayed(player):
@@ -84,6 +90,7 @@ class WelcomePage(Page):
 class DemographicsPage(Page):
     form_model = 'player'
     form_fields = ['age', 'gender']
+
     # VISIBLE WHEN
     @staticmethod
     def is_displayed(player):
@@ -93,26 +100,126 @@ class DemographicsPage(Page):
 class InstructionsPage(Page):
     form_model = 'player'
     form_fields = ['understood_instructions']
+
     # VISIBLE WHEN
     @staticmethod
     def is_displayed(player):
         return player.round_number == 1
 
+
 class FirstSlotsPage(Page):
+    form_model = 'player'
+    form_fields = ['slot_spun']
+
+    @staticmethod
+    def before_next_page(player: Player, timeout_happened):
+        player.tokens = C.endowment
+        if player.treatment == 0:
+            slot = random.choice(C.tuple_control_treatment0)
+            player.slot_shown = slot + ".png"
+            if player.slot_shown == "777.png":
+                player.tokens += 40
+                player.message = "You won 50 tokens!"
+            elif player.slot_shown == "WWW.png":
+                player.tokens += 10
+                player.message = "You won 20 tokens!"
+            elif player.slot_shown == "PPP.png":
+                player.tokens += 0
+                player.message = "You won 10 tokens!"
+            else:
+                player.tokens += -10
+                player.message = "You lost :("
+        elif player.treatment == 1:
+            slot = random.choice(C.tuple_NSNM_treatment1)
+            player.slot_shown = slot + ".png"
+            if player.slot_shown == "777.png":
+                player.tokens += 40
+                player.message = "You won 50 tokens!"
+            elif player.slot_shown == "WWW.png":
+                player.tokens += 10
+                player.message = "You won 20 tokens!"
+            elif player.slot_shown == "PPP.png":
+                player.tokens += 0
+                player.message = "You won 10 tokens!"
+            else:
+                player.tokens += -10
+                player.message = "You lost :("
+        elif player.treatment == 2:
+            slot = random.choice(C.tuple_SNM_treatment2)
+            player.slot_shown = slot + ".png"
+            if player.slot_shown == "777.png":
+                player.tokens += 40
+                player.message = "You won 50 tokens!"
+            elif player.slot_shown == "WWW.png":
+                player.tokens += 10
+                player.message = "You won 20 tokens!"
+            elif player.slot_shown == "PPP.png":
+                player.tokens += 0
+                player.message = "You won 10 tokens!"
+            else:
+                player.tokens += -10
+                player.message = "You lost :("
+
+    # VISIBLE WHEN
     @staticmethod
     def is_displayed(player):
         return player.round_number == 1
 
 
 class SlotsPage(Page):
+    form_model = 'player'
+    form_fields = ['slot_spun']
+
     @staticmethod
-    def vars_for_template(player: Player):
-        slot = random.choice(C.tuple_SNM_treatment2)
-        player.slot_shown = slot + ".png"
+    def before_next_round(player: Player, timeout_happened):
+        if player.treatment == 0:
+            slot = random.choice(C.tuple_control_treatment0)
+            player.slot_shown = slot + ".png"
+            if player.slot_shown == "777.png":
+                player.tokens += 40
+                player.message = "You won 50 tokens!"
+            elif player.slot_shown == "WWW.png":
+                player.tokens += 10
+                player.message = "You won 20 tokens!"
+            elif player.slot_shown == "PPP.png":
+                player.tokens += 0
+                player.message = "You won 10 tokens!"
+            else:
+                player.tokens += -10
+                player.message = "You lost :("
+        elif player.treatment == 1:
+            slot = random.choice(C.tuple_NSNM_treatment1)
+            player.slot_shown = slot + ".png"
+            if player.slot_shown == "777.png":
+                player.tokens += 40
+                player.message = "You won 50 tokens!"
+            elif player.slot_shown == "WWW.png":
+                player.tokens += 10
+                player.message = "You won 20 tokens!"
+            elif player.slot_shown == "PPP.png":
+                player.tokens += 0
+                player.message = "You won 10 tokens!"
+            else:
+                player.tokens += -10
+                player.message = "You lost :("
+        elif player.treatment == 2:
+            slot = random.choice(C.tuple_SNM_treatment2)
+            player.slot_shown = slot + ".png"
+            if player.slot_shown == "777.png":
+                player.tokens += 40
+                player.message = "You won 50 tokens!"
+            elif player.slot_shown == "WWW.png":
+                player.tokens += 10
+                player.message = "You won 20 tokens!"
+            elif player.slot_shown == "PPP.png":
+                player.tokens += 0
+                player.message = "You won 10 tokens!"
+            else:
+                player.tokens += -10
+                player.message = "You lost :("
 
 
 page_sequence = [WelcomePage, DemographicsPage, InstructionsPage, FirstSlotsPage, SlotsPage]
-
 
 # @staticmethod
 # def before_next_page(player, timeout_happened):

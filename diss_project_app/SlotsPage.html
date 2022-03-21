@@ -6,12 +6,16 @@
 
  <img src="{% static player.slot_shown %}" alt="slot output">
 
-<p>You have {{C.endowment}} Tokens
-    <br>
+<p>{{player.message}}</p>
+
+<p>You have {{player.tokens}} tokens
     <br>
 </p>
 
-<p>3 Plums = 10 Tokens<br>3 Watermelons = 20 Tokens<br>3 Lucky 7s = 50 Tokens</p>
+<p>Plums = 10 tokens<br>
+    Watermelons = 20 tokens<br>
+    Lucky 7s = 50 tokens<br>
+</p>
 
 <style>
 
@@ -46,15 +50,11 @@ ul {
   font-size: medium;
 }
 
-.center {
-  margin-left: auto;
-  margin-right: auto;
-}
-
 </style>
 
-<div class="center">
-    {{ next_button }}
+
+<div style="text-align:center" class="button">
+<button name="slot_spun" value="True">SPIN</button>
 </div>
 
 {{ endblock }}
