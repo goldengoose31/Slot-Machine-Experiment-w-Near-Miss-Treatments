@@ -26,17 +26,25 @@
     <li>These payoffs will be displayed on the next page as well for convenience</li>
     <li>You will be endowed with a starting amount of <b>100</b> tokens, and each bet on the slot machine costs you <b>10</b> tokens</li>
     <li>Each token is equivalent to one ticket in the prize draw <b>(3 x £20 Amazon vouchers)</b>. You can win tokens to get a higher amount of tickets in the prize draw</li>
-    <br>
-    <li>Whenever you are out of tokens, or you wish to stop playing, you can simply exit the tab and your results will be automatically recorded</li>
+    </ul>
+<br>
+<ul>    <li><b>Whenever you are out of tokens you will be unable to carry on playing the game</b></li>
+    <li><b>If you have tokens, and you wish to stop playing, you can simply exit the tab and your results will be automatically recorded for the raffle draw</b></li>
 </ul>
+
 
     {{ formfields }}
 
-<p><b>GOOD LUCK!</b></p>
+<p class="goodluck"><b>GOOD LUCK!</b></p>
 
 <style>
 
-    h1 {
+    .goodluck {
+  font-family: Verdana, serif;
+  font-size: medium;
+}
+
+h1 {
   text-align: center;
 }
 
@@ -51,7 +59,7 @@ title {
 
 p {
   font-family: Verdana, serif;
-  font-size: medium;
+  font-size: x-small;
 }
 
 .slots {
@@ -87,6 +95,6 @@ ul {
     {{ next_button }}
 </div>
 
-
+<p>Graphics attributed to <b>macrovector</b> - <a href="https://www.freepik.com/vectors/gambling">Gambling vector created by macrovector - www.freepik.com</a>
 
 {{ endblock }}
