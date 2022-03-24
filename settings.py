@@ -4,7 +4,7 @@ SESSION_CONFIGS = [
     dict(
          name='diss_project_app',
          app_sequence=['diss_project_app'],
-         num_demo_participants=25,
+         num_demo_participants=200,
      ),
 ]
 
@@ -28,9 +28,9 @@ LANGUAGE_CODE = 'en'
 REAL_WORLD_CURRENCY_CODE = 'USD'
 USE_POINTS = True
 
-ADMIN_USERNAME = 'admin'
+ADMIN_USERNAME = 'henners31'
 # for security, best to set admin password in an environment variable
-ADMIN_PASSWORD = environ.get('OTREE_ADMIN_PASSWORD')
+ADMIN_PASSWORD = 'klokan17'
 
 DEMO_PAGE_INTRO_HTML = """ """
 
