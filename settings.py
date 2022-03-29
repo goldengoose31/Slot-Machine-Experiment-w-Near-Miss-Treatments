@@ -30,7 +30,7 @@ USE_POINTS = True
 
 ADMIN_USERNAME = 'henners31'
 # for security, best to set admin password in an environment variable
-ADMIN_PASSWORD = 'klokan17'
+ADMIN_PASSWORD = 'Password'
 
 DEMO_PAGE_INTRO_HTML = """ """
 
