@@ -28,9 +28,9 @@ LANGUAGE_CODE = 'en'
 REAL_WORLD_CURRENCY_CODE = 'USD'
 USE_POINTS = True
 
-ADMIN_USERNAME = 'henners31'
+ADMIN_USERNAME = '-redacted-'
 # for security, best to set admin password in an environment variable
-ADMIN_PASSWORD = 'Password'
+ADMIN_PASSWORD = '-redacted-'
 
 DEMO_PAGE_INTRO_HTML = """ """
 
